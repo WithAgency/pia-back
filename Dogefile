@@ -26,8 +26,9 @@ services:
     port: 8000
     instance_size: XS
 
-workers:
+jobs:
   - name: migrate
+    when: PRE_DEPLOY
     image: api
     command: bundle exec rails db:migrate
     envs: [ api ]
