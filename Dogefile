@@ -11,6 +11,7 @@ env:
       DO_SPACES_REGION: '{{ get("DO_SPACES_REGION") }}'
       DO_SPACES_BUCKET: '{{ get("DO_SPACES_BUCKET") }}'
       DO_SPACES_ENDPOINT: '{{ get("DO_SPACES_ENDPOINT") }}'
+      SECRET_KEY_BASE: '{{ secret("SECRET_KEY_BASE") }}'
 
 images:
   - name: api
