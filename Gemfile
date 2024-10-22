@@ -16,6 +16,9 @@ gem 'carrierwave'
 gem 'carrierwave-base64'
 gem 'dotenv-rails'
 
+# o1 made me do it
+gem 'fog-aws'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production

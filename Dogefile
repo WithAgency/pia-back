@@ -1,0 +1,40 @@
+---
+name: PIA Back
+
+env:
+  - name: api
+    variables:
+      DATABASE_URL: '{{ psql.DATABASE_URL }}'
+      REDIS_URL: '{{ redis.REDIS_URL }}'
+      DO_SPACES_ACCESS_KEY_ID: '{{ get("DO_SPACES_ACCESS_KEY_ID") }}'
+      DO_SPACES_SECRET_ACCESS_KEY: '{{ secret("DO_SPACES_SECRET_ACCESS_KEY") }}'
+      DO_SPACES_REGION: '{{ get("DO_SPACES_REGION") }}'
+      DO_SPACES_BUCKET: '{{ get("DO_SPACES_BUCKET") }}'
+      DO_SPACES_ENDPOINT: '{{ get("DO_SPACES_ENDPOINT") }}'
+
+images:
+  - name: api
+    build_context: .
+
+services:
+  - name: api
+    image: api
+    envs: [ api ]
+    route_prefixes:
+      - "/"
+    port: 8000
+    instance_size: XS
+
+databases:
+  - name: psql
+    cluster_name: 'pia-psql-{{ production("prod", default="dev") }}'
+    db_name: '{{ deployment_key }}'
+    db_user: '{{ deployment_key }}'
+    engine: pg
+    version: "15"
+    instance_size: XXS
+  - name: redis
+    cluster_name: 'pia-redis-{{ production("prod", default="dev") }}'
+    engine: redis
+    instance_size: XS
+    version: "7"
