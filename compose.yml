@@ -1,0 +1,7 @@
+services:
+  web:
+    build: .
+    command: bundle exec rails s -b 0.0.0.0 -p 8000
+    ports:
+      - "8042:8000"
+    env_file: ".env"
